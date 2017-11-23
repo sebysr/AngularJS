@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <!--Sidebar content-->
+
+      <p>
+        Search: 	<!-- AngularJS's filter function to process the input for the ngRepeat directive.-->
+        <input ng-model="$ctrl.query">
+      </p>
+
+      <p>
+        Sort by:	<!-- orderBy filter process the input for the repeater. 
+        				 orderBy is a filter that takes an input array, 
+        				 copies it and reorders the copy which is then returned.-->
+        				 <b>{{$ctrl.orderProp}}</b> current order value as text. 
+        				 
+        <select ng-model="$ctrl.orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="age">Newest</option>
+          <option value="-age">Oldest</option>
+        </select>
+      </p>
+
+    </div>
+    <div class="col-md-10">
+      <!--Body content-->
+
+      <ul class="phones">
+        <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+          <span>{{phone.name}}</span>
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

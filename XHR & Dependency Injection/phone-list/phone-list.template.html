@@ -1,0 +1,48 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			<!--Sidebar content-->
+
+			<p>
+				Search:
+				<!-- AngularJS's filter function to process the input for the ngRepeat directive.-->
+				<input ng-model="$ctrl.query"></input>
+			</p>
+
+			<p>
+				Sort by:
+				<!-- orderBy filter process the input for the repeater. 
+        				 orderBy is a filter that takes an input array, 
+        				 copies it and reorders the copy which is then returned.-->
+				<b>{{$ctrl.orderProp}}</b> current order value as text. <select
+					ng-model="$ctrl.orderProp">
+					<option value="name">Alphabetical</option>
+					<option value="age">Newest</option>
+					<option value="-age">Oldest</option>
+				</select>
+			</p>
+
+		</div>
+		<div class="col-md-10">
+			<!--Body content-->
+
+			<ul class="phones">
+				<li
+					ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp"
+					class="thumbnail"><a href="#/phones/{{phone.id}}"
+					class="thumb"> <img ng-src="{{phone.imageUrl}}"
+						alt="{{phone.name}}" />
+				</a> <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+					<p>{{phone.snippet}}</p></li>
+			</ul>
+
+			<p>
+				To see the list of phones displayed in JSON format <a href=""
+					ng-click="$ctrl.show()">CLICK HERE</a> Value:
+				{{$ctrl.preVisibility}}
+			<pre ng-show="$ctrl.preVisibility"
+				class="hideByDefault-{{$ctrl.preVisibility}}">{{$ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp | json}}</pre>
+			</p>
+		</div>
+	</div>
+</div>
